@@ -1,0 +1,70 @@
+[build]
+  publish = "public"
+
+[[redirects]]
+  from = "/tickets"
+  to = "https://shop.weeztix.com/8f00acf9-cd91-452a-ae22-7fa14a0a77bc"
+  status = 302
+
+[[redirects]]
+  from = "/events"
+  to = "https://shop.weeztix.com/8f00acf9-cd91-452a-ae22-7fa14a0a77bc"
+  status = 302
+
+[[redirects]]
+  from = "/signup"
+  to = "https://docs.google.com/forms/d/e/1FAIpQLSfkCK7nf1Eng3eyBghQrY6sk-PkRzoguNkHh3pbwtckFfwOeA/viewform"
+  status = 302
+
+[[redirects]]
+  from = "/community"
+  to = "https://docs.google.com/forms/d/e/1FAIpQLSfkCK7nf1Eng3eyBghQrY6sk-PkRzoguNkHh3pbwtckFfwOeA/viewform"
+  status = 302
+
+[[redirects]]
+  from = "/join"
+  to = "https://docs.google.com/forms/d/e/1FAIpQLSfkCK7nf1Eng3eyBghQrY6sk-PkRzoguNkHh3pbwtckFfwOeA/viewform"
+  status = 302
+
+[[redirects]]
+  from = "/opendecks"
+  to = "https://docs.google.com/forms/d/e/1FAIpQLSfkCK7nf1Eng3eyBghQrY6sk-PkRzoguNkHh3pbwtckFfwOeA/viewform"
+  status = 302
+
+[[redirects]]
+  from = "/instagram"
+  to = "https://www.instagram.com/sonic.tonic.collective/"
+  status = 302
+
+[[redirects]]
+  from = "/youtube"
+  to = "https://youtube.com/@sonic.tonic.collective"
+  status = 302
+
+[[redirects]]
+  from = "/mixcloud"
+  to = "https://mixcloud.com/sonictoniccollective"
+  status = 302
+
+[[redirects]]
+  from = "/donate"
+  to = "https://donate.stripe.com/fZueVcbHwalI6s05gw9MY00?utm_source=chatgpt.com"
+  status = 302
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'none'; style-src 'unsafe-inline'; img-src 'self' data:; font-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests"
+    Cross-Origin-Opener-Policy = "same-origin"
+    Cross-Origin-Resource-Policy = "same-origin"
+    Permissions-Policy = "accelerometer=(), autoplay=(), camera=(), geolocation=(), gyroscope=(), microphone=(), payment=(), usb=()"
+    Referrer-Policy = "no-referrer"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+
+[[headers]]
+  for = "/brand/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, immutable"
+
