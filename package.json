@@ -1,0 +1,15 @@
+{
+  "name": "stc-website",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test"
+  },
+  "dependencies": {
+    "@netlify/blobs": "11.1.4",
+    "stripe": "23.0.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
