@@ -7,6 +7,19 @@
   const dialog = document.querySelector("[data-consent-dialog]");
   const paymentChoice = document.querySelector("[data-payment-choice]");
   const paymentRoot = document.querySelector("[data-payment-root]");
+  const redirectCountdown = document.querySelector("[data-redirect-countdown]");
+
+  if (redirectCountdown) {
+    let seconds = Number(redirectCountdown.textContent) || 6;
+    const redirectTimer = window.setInterval(() => {
+      seconds -= 1;
+      redirectCountdown.textContent = String(Math.max(seconds, 0));
+      if (seconds <= 0) {
+        window.clearInterval(redirectTimer);
+        window.location.replace("/");
+      }
+    }, 1000);
+  }
 
   function parseChoice(name) {
     const item = document.cookie.split("; ").find((row) => row.startsWith(name + "="));
