@@ -97,6 +97,9 @@
     .consent-banner h2, .consent-dialog h2 { margin: 0 0 .35rem; font-size: 1.35rem; text-transform: uppercase; }
     .consent-banner p, .consent-dialog p { margin: 0; font-family: system-ui, sans-serif; font-size: .9rem; line-height: 1.5; }
     .consent-actions { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; }
+    .consent-actions-prioritized { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: stretch; }
+    .consent-actions-prioritized .primary { grid-column: 1 / -1; min-height: 4.25rem; font-size: 1.1rem; }
+    .consent-actions-prioritized .secondary { min-height: 3.15rem; }
     .consent-dialog { width: min(calc(100% - 2rem), 36rem); padding: 0; border: 1px solid var(--white); background: #111; color: var(--white); }
     .consent-dialog::backdrop { background: rgba(0,0,0,.78); }
     .consent-dialog form { padding: 1.5rem; }
@@ -118,7 +121,7 @@
       footer { align-items: flex-start; flex-direction: column; gap: .6rem; }
       .consent-card { gap: 1.25rem; }
     }
-    @media (max-width: 420px) { .links { grid-template-columns: 1fr; } .link { min-height: auto; } .link small { margin-bottom: 1.5rem; } .consent-actions { align-items: stretch; flex-direction: column; } .consent-actions button { width: 100%; } }
+    @media (max-width: 420px) { .links { grid-template-columns: 1fr; } .link { min-height: auto; } .link small { margin-bottom: 1.5rem; } .consent-actions { align-items: stretch; flex-direction: column; } .consent-actions button { width: 100%; } .consent-actions-prioritized { grid-template-columns: 1fr; } }
     @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; } }
 </style>
   <script src="/assets/consent.js" defer></script>
@@ -146,7 +149,7 @@
   <section class="consent-banner" data-consent-banner hidden role="dialog" aria-modal="true" aria-labelledby="consent-title" aria-describedby="consent-description">
     <div class="consent-card">
       <div><h2 id="consent-title">Your privacy choices</h2><p id="consent-description">We use a necessary cookie to remember your choice. Stripe only loads when you allow payments and fraud prevention.</p></div>
-      <div class="consent-actions">
+      <div class="consent-actions consent-actions-prioritized">
         <button class="primary" type="button" data-consent-accept>Accept all</button>
         <button class="secondary" type="button" data-consent-reject>Reject optional</button>
         <button class="secondary" type="button" data-consent-manage>Manage preferences</button>
