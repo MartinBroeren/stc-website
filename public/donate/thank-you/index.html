@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Thank you for supporting Sonic Tonic Collective.">
+  <meta name="theme-color" content="#0A0A0A">
+  <title>Thank you | Sonic Tonic Collective</title>
+  <link rel="icon" href="/favicon.svg?v=3" type="image/svg+xml" sizes="any">
+  <link rel="shortcut icon" href="/favicon.svg?v=3" type="image/svg+xml">
+  <style>
+    @font-face {
+      font-family: "Genos";
+      src: url("/brand/genos.woff2") format("woff2");
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: swap;
+    }
+    :root {
+      color-scheme: dark;
+      --black: #0A0A0A;
+      --white: #FFFFFF;
+      --line: rgba(255, 255, 255, 0.28);
+      --muted: rgba(255, 255, 255, 0.68);
+      font-family: "Genos", system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { background: var(--black); }
+    body {
+      min-height: 100vh;
+      margin: 0;
+      overflow-x: hidden;
+      background: radial-gradient(circle at center, rgba(255,255,255,.08) 0 1px, transparent 1.2px) 0 0 / 8px 8px, var(--black);
+      color: var(--white);
+      animation: field-drift 48s linear infinite;
+    }
+    a { color: inherit; }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    .shell {
+      position: relative;
+      isolation: isolate;
+      display: flex;
+      flex-direction: column;
+      width: min(100%, 96rem);
+      min-height: 100svh;
+      margin: 0 auto;
+      padding: clamp(1.25rem, 3vw, 3rem);
+    }
+    .mark {
+      position: absolute;
+      z-index: -1;
+      top: 5%;
+      left: 50%;
+      width: min(60vw, 39rem);
+      min-width: 18rem;
+      opacity: .12;
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+    header { display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; }
+    .logo { display: block; width: clamp(7rem, 10vw, 10rem); height: auto; }
+    .context { max-width: 20rem; margin: 0; font-size: 1rem; line-height: 1.25; text-align: right; }
+    .context span, .muted { color: var(--muted); }
+    main { display: grid; flex: 1; align-content: center; justify-items: center; width: 100%; padding: clamp(4rem, 9vh, 8rem) 0 clamp(3rem, 7vh, 6rem); }
+    h1 { width: 100%; margin: 0 auto; font-size: clamp(4.6rem, 13vw, 12.5rem); font-weight: 100; letter-spacing: -.045em; line-height: .72; text-align: center; text-transform: uppercase; animation: content-in 900ms cubic-bezier(.2,.7,.2,1) both; }
+    h1 strong { display: block; font-weight: 900; }
+    .links { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); width: 100%; margin-top: clamp(3.5rem, 8vh, 7rem); border-top: 1px solid var(--line); border-left: 1px solid var(--line); animation: content-in 900ms 140ms cubic-bezier(.2,.7,.2,1) both; }
+    .link { position: relative; min-height: 8.5rem; padding: 1.15rem; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); text-decoration: none; transition: background-color 160ms ease, color 160ms ease; }
+    .link small { display: block; margin-bottom: 2.5rem; color: var(--muted); font-size: .875rem; font-weight: 500; letter-spacing: .14em; }
+    .link span { display: flex; align-items: end; justify-content: space-between; gap: 1rem; font-size: clamp(1.25rem, 2vw, 1.75rem); font-weight: 700; line-height: 1; text-transform: uppercase; }
+    .link b { font-size: 1.25em; font-weight: 300; transition: transform 160ms ease; }
+    .link:hover, .link:focus-visible { background: var(--white); color: var(--black); outline: none; }
+    .link:hover small, .link:focus-visible small { color: rgba(10,10,10,.66); }
+    .link:hover b, .link:focus-visible b { transform: translate(.18rem, -.18rem); }
+    footer { display: flex; align-items: center; justify-content: space-between; gap: 1rem 2rem; color: var(--muted); font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: .6rem 1rem; align-items: center; }
+    .footer-links a, .footer-links button { padding: 0; border: 0; background: transparent; color: inherit; text-transform: uppercase; text-decoration: underline; text-underline-offset: .2em; }
+    .content { justify-items: start; align-content: start; width: min(100%, 48rem); margin: 0 auto; padding-top: clamp(4rem, 10vh, 8rem); }
+    .content h1 { font-size: clamp(3.5rem, 10vw, 7rem); line-height: .82; text-align: left; }
+    .content h2 { margin: 2.5rem 0 .5rem; font-size: 1.6rem; text-transform: uppercase; }
+    .content p, .content li { font-family: system-ui, sans-serif; line-height: 1.65; }
+    .content a { text-underline-offset: .2em; }
+    .donate-main { align-content: center; gap: clamp(2rem, 5vh, 4rem); padding-inline: 1rem; }
+    .donate-copy { width: min(100%, 48rem); text-align: center; }
+    .donate-copy h1 { font-size: clamp(3.5rem, 9vw, 7.5rem); line-height: .82; }
+    .donate-copy p { max-width: 42rem; margin: 1.2rem auto 0; font-family: system-ui, sans-serif; font-size: clamp(1rem, 2vw, 1.2rem); line-height: 1.6; }
+    .donate-action { display: grid; justify-items: center; gap: 1rem; width: min(100%, 38rem); padding: clamp(1.5rem, 4vw, 2.5rem); border: 1px solid var(--line); background: rgba(10,10,10,.72); text-align: center; }
+    .donate-action p { max-width: 30rem; margin: 0; font-family: system-ui, sans-serif; line-height: 1.55; }
+    .donate-cta { display: flex; align-items: center; justify-content: space-between; gap: 2rem; width: 100%; min-height: 4.5rem; padding: 1rem 1.25rem; border: 1px solid var(--white); background: var(--white); color: var(--black); font-size: clamp(1.2rem, 3vw, 1.6rem); font-weight: 800; line-height: 1; text-decoration: none; text-transform: uppercase; transition: background-color 160ms ease, color 160ms ease; }
+    .donate-cta span:last-child { font-size: 1.5em; font-weight: 300; transition: transform 160ms ease; }
+    .donate-cta:hover, .donate-cta:focus-visible { background: var(--black); color: var(--white); outline: none; }
+    .donate-cta:hover span:last-child, .donate-cta:focus-visible span:last-child { transform: translateX(.25rem); }
+    .thank-you-main { gap: 2rem; text-align: center; }
+    .thank-you-main h1 { max-width: 72rem; font-size: clamp(3.8rem, 11vw, 9rem); line-height: .8; }
+    .thank-you-main p { max-width: 42rem; margin: 0; font-family: system-ui, sans-serif; font-size: clamp(1rem, 2vw, 1.2rem); line-height: 1.6; }
+    .thank-you-main .redirect-note { color: var(--muted); font-size: .85rem; letter-spacing: .06em; text-transform: uppercase; }
+    .thank-you-main .back-link { font-weight: 800; letter-spacing: .08em; text-transform: uppercase; text-underline-offset: .25em; }
+    .primary, .secondary { min-height: 2.9rem; padding: .65rem 1rem; border: 1px solid var(--white); font-weight: 700; text-transform: uppercase; }
+    .primary { background: var(--white); color: var(--black); }
+    .secondary { background: transparent; color: var(--white); }
+    .consent-banner { position: fixed; z-index: 20; inset: 0; display: grid; place-items: center; padding: 1rem; background: rgba(0,0,0,.38); }
+    .consent-banner[hidden] { display: none; }
+    .consent-card { display: grid; gap: 1.5rem; width: min(100%, 42rem); padding: clamp(1.4rem, 4vw, 2.5rem); border: 1px solid var(--white); background: #111; box-shadow: 0 1.5rem 6rem rgba(0,0,0,.8); }
+    .consent-banner h2, .consent-dialog h2 { margin: 0 0 .35rem; font-size: 1.35rem; text-transform: uppercase; }
+    .consent-banner p, .consent-dialog p { margin: 0; font-family: system-ui, sans-serif; font-size: .9rem; line-height: 1.5; }
+    .consent-actions { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; }
+    .consent-actions-prioritized { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: stretch; }
+    .consent-actions-prioritized .primary { grid-column: 1 / -1; min-height: 4.25rem; font-size: 1.1rem; }
+    .consent-actions-prioritized .secondary { min-height: 3.15rem; }
+    .consent-dialog { width: min(calc(100% - 2rem), 36rem); padding: 0; border: 1px solid var(--white); background: #111; color: var(--white); }
+    .consent-dialog::backdrop { background: rgba(0,0,0,.78); }
+    .consent-dialog form { padding: 1.5rem; }
+    .consent-option { display: grid; grid-template-columns: 1fr auto; gap: .4rem 1rem; margin: 1.5rem 0; padding: 1rem 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .consent-option strong { text-transform: uppercase; }
+    .consent-option small { grid-column: 1 / -1; color: var(--muted); font-family: system-ui, sans-serif; line-height: 1.45; }
+    .consent-option input { width: 1.4rem; height: 1.4rem; accent-color: var(--white); }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    @keyframes field-drift { from { background-position: 0 0, 0 0; } to { background-position: 32px 16px, 0 0; } }
+    @keyframes content-in { from { opacity: 0; transform: translateY(1rem); } to { opacity: 1; transform: translateY(0); } }
+    @media (max-width: 1100px) { .links { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    @media (max-width: 760px) {
+      .shell { padding: 1.25rem; }
+      .context { max-width: 12rem; font-size: .9rem; }
+      .mark { top: 15%; width: 88vw; }
+      h1 { font-size: clamp(4rem, 22vw, 7.5rem); line-height: .75; }
+      .links { grid-template-columns: 1fr 1fr; }
+      .link { min-height: 7.5rem; }
+      footer { align-items: flex-start; flex-direction: column; gap: .6rem; }
+      .consent-card { gap: 1.25rem; }
+    }
+    @media (max-width: 420px) { .links { grid-template-columns: 1fr; } .link { min-height: auto; } .link small { margin-bottom: 1.5rem; } .consent-actions { align-items: stretch; flex-direction: column; } .consent-actions button { width: 100%; } .consent-actions-prioritized { grid-template-columns: 1fr; } }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; } }
+</style>
+  <script src="/assets/consent.js" defer></script>
+</head>
+<body class="thank-you-page">
+  <div class="shell">
+    <img class="mark" src="/brand/stc-symbol.svg" alt="" aria-hidden="true">
+    <header>
+      <a href="/" aria-label="Sonic Tonic Collective home"><img class="logo" src="/brand/stc-logo.svg" alt="Sonic Tonic Collective"></a>
+      <p class="context">Amsterdam DJs and music lovers.<br><span>Energy over genre.</span></p>
+    </header>
+    <main class="thank-you-main"><h1>Thank you.<strong>You keep the collective moving.</strong></h1><p>Your contribution helps us create independent events, make space for new talent and keep the music accessible.</p><p class="redirect-note" aria-live="polite">Back to the homepage in <strong data-redirect-countdown>6</strong> seconds.</p><a class="back-link" href="/">Back to Sonic Tonic</a></main>
+    <footer><span>Sonic Tonic Collective · Amsterdam</span><nav class="footer-links" aria-label="Legal and privacy"><a href="/privacy">Privacy &amp; cookies</a></nav></footer>
+  </div>
+  
+  <section class="consent-banner" data-consent-banner hidden role="dialog" aria-modal="true" aria-labelledby="consent-title" aria-describedby="consent-description">
+    <div class="consent-card">
+      <div><h2 id="consent-title">Your privacy choices</h2><p id="consent-description">We use a necessary cookie to remember your choice. Stripe only loads when you allow payments and fraud prevention.</p></div>
+      <div class="consent-actions consent-actions-prioritized">
+        <button class="primary" type="button" data-consent-accept>Accept all</button>
+        <button class="secondary" type="button" data-consent-reject>Reject optional</button>
+        <button class="secondary" type="button" data-consent-manage>Manage preferences</button>
+      </div>
+    </div>
+  </section>
+  <dialog class="consent-dialog" data-consent-dialog aria-labelledby="preferences-title">
+    <form method="dialog">
+      <h2 id="preferences-title">Privacy preferences</h2>
+      <p>Choose which optional service may run on this site.</p>
+      <div class="consent-option"><strong>Necessary</strong><input type="checkbox" checked disabled aria-label="Necessary cookies, always active"><small>Stores your privacy choice for six months and supports core site security.</small></div>
+      <div class="consent-option"><strong>Payments &amp; fraud prevention</strong><input type="checkbox" data-payment-choice aria-label="Allow Stripe payments and fraud prevention"><small>Loads Stripe on the donation page. Stripe may process device and activity data and may set its own cookies.</small></div>
+      <div class="consent-actions">
+        <button class="primary" type="button" data-consent-dialog-accept>Accept all</button>
+        <button class="secondary" value="save" data-consent-save>Save choices</button>
+        <button class="secondary" value="cancel">Cancel</button>
+      </div>
+    </form>
+  </dialog>
+</body>
+</html>
