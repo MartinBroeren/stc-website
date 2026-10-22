@@ -14,7 +14,7 @@ Do not commit any of these secrets to GitHub.
 
 1. Deploy the branch as a Netlify Deploy Preview and test with Stripe test mode.
 2. In Stripe Workbench, create a webhook destination for the production URL.
-3. Use `https://www.sonictoniccollective.com/.netlify/functions/stripe-webhook` as the endpoint.
+3. Use `https://sonictoniccollective.com/.netlify/functions/stripe-webhook` as the endpoint.
 4. Subscribe only to `checkout.session.completed` and `checkout.session.async_payment_succeeded`.
 5. Copy the live endpoint signing secret to Netlify as `STRIPE_WEBHOOK_SECRET`.
 
