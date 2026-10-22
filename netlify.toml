@@ -47,17 +47,17 @@
   status = 302
 
 [[redirects]]
-  from = "/donate"
-  to = "https://donate.stripe.com/fZueVcbHwalI6s05gw9MY00?utm_source=chatgpt.com"
+  from = "/cookies"
+  to = "/privacy"
   status = 302
 
 [[headers]]
   for = "/*"
   [headers.values]
-    Content-Security-Policy = "default-src 'none'; style-src 'unsafe-inline'; img-src 'self' data:; font-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests"
+    Content-Security-Policy = "default-src 'none'; script-src 'self' https://js.stripe.com; style-src 'unsafe-inline'; img-src 'self' data: https://*.stripe.com; font-src 'self'; connect-src 'self' https://api.stripe.com https://r.stripe.com https://m.stripe.com; frame-src https://js.stripe.com https://hooks.stripe.com https://checkout.stripe.com https://buy.stripe.com; base-uri 'none'; form-action 'self' https://checkout.stripe.com https://buy.stripe.com; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests"
     Cross-Origin-Opener-Policy = "same-origin"
     Cross-Origin-Resource-Policy = "same-origin"
-    Permissions-Policy = "accelerometer=(), autoplay=(), camera=(), geolocation=(), gyroscope=(), microphone=(), payment=(), usb=()"
+    Permissions-Policy = "accelerometer=(), autoplay=(), camera=(), geolocation=(), gyroscope=(), microphone=(), usb=()"
     Referrer-Policy = "no-referrer"
     Strict-Transport-Security = "max-age=31536000; includeSubDomains"
     X-Content-Type-Options = "nosniff"
@@ -68,3 +68,12 @@
   [headers.values]
     Cache-Control = "public, max-age=604800, immutable"
 
+[[headers]]
+  for = "/favicon.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=300"
