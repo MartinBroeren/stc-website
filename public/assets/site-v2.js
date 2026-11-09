@@ -13,7 +13,14 @@
   }));
 
   const header = document.querySelector(".site-header");
-  const updateHeader = () => header?.classList.toggle("is-scrolled", window.scrollY > 72);
+  const updateHeader = () => {
+    if (!header) return;
+    if (!header.classList.contains("is-scrolled") && window.scrollY > 140) {
+      header.classList.add("is-scrolled");
+    } else if (header.classList.contains("is-scrolled") && window.scrollY < 12) {
+      header.classList.remove("is-scrolled");
+    }
+  };
   updateHeader();
   window.addEventListener("scroll", updateHeader, { passive: true });
 
@@ -21,7 +28,8 @@
     const setPosterShape = () => {
       if (!image.naturalWidth || !image.naturalHeight) return;
       const ratio = image.naturalWidth / image.naturalHeight;
-      image.closest(".event-feature")?.setAttribute("data-poster-shape", ratio < .9 ? "portrait" : "square");
+      const shape = ratio < .7 ? "reel" : ratio < .9 ? "portrait" : "square";
+      image.closest(".event-feature")?.setAttribute("data-poster-shape", shape);
     };
     if (image.complete) setPosterShape();
     else image.addEventListener("load", setPosterShape, { once: true });
