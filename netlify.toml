@@ -13,22 +13,17 @@
 
 [[redirects]]
   from = "/signup"
-  to = "https://docs.google.com/forms/d/e/1FAIpQLSfkCK7nf1Eng3eyBghQrY6sk-PkRzoguNkHh3pbwtckFfwOeA/viewform"
-  status = 302
-
-[[redirects]]
-  from = "/community"
-  to = "https://docs.google.com/forms/d/e/1FAIpQLSfkCK7nf1Eng3eyBghQrY6sk-PkRzoguNkHh3pbwtckFfwOeA/viewform"
+  to = "/community"
   status = 302
 
 [[redirects]]
   from = "/join"
-  to = "https://docs.google.com/forms/d/e/1FAIpQLSfkCK7nf1Eng3eyBghQrY6sk-PkRzoguNkHh3pbwtckFfwOeA/viewform"
+  to = "/community"
   status = 302
 
 [[redirects]]
   from = "/opendecks"
-  to = "https://docs.google.com/forms/d/e/1FAIpQLSfkCK7nf1Eng3eyBghQrY6sk-PkRzoguNkHh3pbwtckFfwOeA/viewform"
+  to = "/community#join"
   status = 302
 
 [[redirects]]
@@ -54,7 +49,7 @@
 [[headers]]
   for = "/*"
   [headers.values]
-    Content-Security-Policy = "default-src 'none'; script-src 'self' https://js.stripe.com; style-src 'unsafe-inline'; img-src 'self' data: https://*.stripe.com; font-src 'self'; connect-src 'self' https://api.stripe.com https://r.stripe.com https://m.stripe.com; frame-src https://js.stripe.com https://hooks.stripe.com https://checkout.stripe.com https://buy.stripe.com; base-uri 'none'; form-action 'self' https://checkout.stripe.com https://buy.stripe.com; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests"
+    Content-Security-Policy = "default-src 'none'; script-src 'self' https://js.stripe.com; style-src 'unsafe-inline' 'self'; img-src 'self' data: https://*.stripe.com; font-src 'self'; connect-src 'self' https://api.stripe.com https://r.stripe.com https://m.stripe.com; frame-src https://js.stripe.com https://hooks.stripe.com https://checkout.stripe.com https://buy.stripe.com; base-uri 'none'; form-action 'self' https://checkout.stripe.com https://buy.stripe.com; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests"
     Cross-Origin-Opener-Policy = "same-origin"
     Cross-Origin-Resource-Policy = "same-origin"
     Permissions-Policy = "accelerometer=(), autoplay=(), camera=(), geolocation=(), gyroscope=(), microphone=(), usb=()"
@@ -62,6 +57,7 @@
     Strict-Transport-Security = "max-age=31536000; includeSubDomains"
     X-Content-Type-Options = "nosniff"
     X-Frame-Options = "DENY"
+    X-Robots-Tag = "noindex, nofollow"
 
 [[headers]]
   for = "/brand/*"
