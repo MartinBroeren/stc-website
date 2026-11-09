@@ -1,0 +1,19 @@
+{
+  "events": [
+    {
+      "slug": "stc-purple-link-2026",
+      "title": "STC × Purple Link",
+      "start": "2026-11-14T21:00:00+01:00",
+      "end": "2026-11-15T04:00:00+01:00",
+      "dateLabel": "14.11.2026",
+      "timeLabel": "21:00–04:00",
+      "venue": "Club UP",
+      "city": "Amsterdam",
+      "lineup": ["USIA", "B LUCID B2B JUDOC", "DARK CIRCLES", "MOMENTIX"],
+      "image": "/assets/email/stc-purple-link-lineup-2026.jpg",
+      "imageAlt": "Sonic Tonic Collective and Purple Link Foundation event line-up",
+      "ticketUrl": "/tickets",
+      "status": "published"
+    }
+  ]
+}

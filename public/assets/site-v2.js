@@ -24,16 +24,83 @@
   updateHeader();
   window.addEventListener("scroll", updateHeader, { passive: true });
 
+  const setPosterShape = (image) => {
+    if (!image.naturalWidth || !image.naturalHeight) return;
+    const ratio = image.naturalWidth / image.naturalHeight;
+    const shape = ratio < .7 ? "reel" : ratio < .9 ? "portrait" : "square";
+    image.closest(".event-feature")?.setAttribute("data-poster-shape", shape);
+  };
+
   document.querySelectorAll(".event-image img").forEach((image) => {
-    const setPosterShape = () => {
-      if (!image.naturalWidth || !image.naturalHeight) return;
-      const ratio = image.naturalWidth / image.naturalHeight;
-      const shape = ratio < .7 ? "reel" : ratio < .9 ? "portrait" : "square";
-      image.closest(".event-feature")?.setAttribute("data-poster-shape", shape);
-    };
-    if (image.complete) setPosterShape();
-    else image.addEventListener("load", setPosterShape, { once: true });
+    if (image.complete) setPosterShape(image);
+    else image.addEventListener("load", () => setPosterShape(image), { once: true });
   });
+
+  const renderFeaturedEvent = async () => {
+    const section = document.querySelector("[data-events-section]");
+    const stage = document.querySelector("[data-event-stage]");
+    if (!section || !stage) return;
+
+    const hideFeature = () => {
+      section.classList.add("no-upcoming");
+      stage.replaceChildren();
+    };
+
+    try {
+      const response = await fetch("/data/events.json", { headers: { Accept: "application/json" } });
+      if (!response.ok) throw new Error("Event data is unavailable.");
+      const payload = await response.json();
+      const now = Date.now();
+      const upcoming = (Array.isArray(payload.events) ? payload.events : [])
+        .filter((item) => item.status === "published" && Date.parse(item.end) >= now)
+        .sort((a, b) => Date.parse(a.start) - Date.parse(b.start))[0];
+      if (!upcoming) {
+        hideFeature();
+        return;
+      }
+
+      const article = document.createElement("article");
+      article.className = "event-feature visible";
+      article.dataset.eventEnd = upcoming.end;
+
+      const imageWrap = document.createElement("div");
+      imageWrap.className = "event-image";
+      const image = document.createElement("img");
+      image.src = upcoming.image;
+      image.alt = upcoming.imageAlt || `${upcoming.title} event artwork`;
+      image.addEventListener("load", () => setPosterShape(image), { once: true });
+      imageWrap.append(image);
+
+      const details = document.createElement("div");
+      details.className = "event-details";
+      const eyebrow = document.createElement("span");
+      eyebrow.className = "eyebrow";
+      eyebrow.textContent = `Next event · ${upcoming.venue}`;
+      const title = document.createElement("h3");
+      title.textContent = upcoming.title;
+      const meta = document.createElement("div");
+      meta.className = "event-meta";
+      const date = document.createElement("span");
+      date.textContent = upcoming.dateLabel;
+      const place = document.createElement("span");
+      place.textContent = `${upcoming.timeLabel} · ${upcoming.city}`;
+      meta.append(date, place);
+      const lineup = document.createElement("p");
+      lineup.className = "event-lineup";
+      lineup.textContent = Array.isArray(upcoming.lineup) ? upcoming.lineup.join(" · ") : "";
+      const tickets = document.createElement("a");
+      tickets.className = "button";
+      tickets.href = upcoming.ticketUrl;
+      tickets.textContent = "Tickets ↗";
+      details.append(eyebrow, title, meta, lineup, tickets);
+      article.append(imageWrap, details);
+      stage.replaceChildren(article);
+    } catch (error) {
+      hideFeature();
+    }
+  };
+
+  renderFeaturedEvent();
 
   const observer = "IntersectionObserver" in window
     ? new IntersectionObserver((entries) => {
@@ -52,13 +119,6 @@
 
   document.querySelectorAll("[data-current-year]").forEach((item) => {
     item.textContent = String(new Date().getFullYear());
-  });
-
-  document.querySelectorAll("[data-upcoming-event]").forEach((event) => {
-    const end = Date.parse(event.dataset.eventEnd || "");
-    if (!Number.isFinite(end) || Date.now() <= end) return;
-    event.hidden = true;
-    event.closest("[data-events-section]")?.classList.add("no-upcoming");
   });
 
   const form = document.querySelector("[data-community-form]");
